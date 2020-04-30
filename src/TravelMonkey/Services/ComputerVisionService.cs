@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
@@ -12,7 +13,7 @@ namespace TravelMonkey.Services
     {
         private readonly ComputerVisionClient _computerVisionClient = new ComputerVisionClient(new ApiKeyServiceClientCredentials(ApiKeys.ComputerVisionApiKey))
         {
-            Endpoint = ApiKeys.ComputerVisionEndpoint
+            Endpoint = $"{ApiKeys.ComputerVisionEndpoint}/"
         };
 
         public async Task<AddPictureResult> AddPicture(Stream pictureStream)
@@ -28,7 +29,7 @@ namespace TravelMonkey.Services
                 var accentColor = Color.FromHex($"#{result.Color.AccentColor}");
 
                 // Determine if there are any landmarks to be seen
-                var landmark = result.Categories.FirstOrDefault(c => c.Detail != null && c.Detail.Landmarks.Any());
+                var landmark = result.Categories.FirstOrDefault(c => c.Detail != null && c.Detail.Landmarks != null && c.Detail.Landmarks.Any());
 
                 var landmarkDescription = "";
 
@@ -37,7 +38,7 @@ namespace TravelMonkey.Services
                 // Wrap in our result object and send along
                 return new AddPictureResult(description, accentColor, landmarkDescription);
             }
-            catch
+            catch(Exception ex)
             {
                 return new AddPictureResult();
             }

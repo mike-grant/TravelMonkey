@@ -92,6 +92,7 @@
                                         <yummy:PancakeView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundGradientStartColor="Transparent" BackgroundGradientEndColor="#222" />
                                         <StackLayout Spacing="0" Margin="12" VerticalOptions="EndAndExpand">
                                             <Label FontSize="16" FontFamily="LatoBold" TextColor="#fff" Text="{Binding Description}" />
+                                            <Label FontSize="16" FontFamily="LatoBold" TextColor="#fff" Text="{Binding FaceDescription}" />
                                         </StackLayout>
                                     </Grid>
                                 </yummy:PancakeView>

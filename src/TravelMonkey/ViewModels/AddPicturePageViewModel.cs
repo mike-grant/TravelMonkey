@@ -12,6 +12,7 @@ namespace TravelMonkey.ViewModels
     public class AddPicturePageViewModel : BaseViewModel
     {
         private readonly ComputerVisionService _computerVisionService = new ComputerVisionService();
+        private readonly FaceService _faceService = new FaceService();
 
         public bool ShowImagePlaceholder => !ShowPhoto;
         public bool ShowPhoto => _photoSource != null;
@@ -105,6 +106,8 @@ namespace TravelMonkey.ViewModels
             {
                 var pictureStream = _photo.GetStreamWithImageRotatedForExternalStorage();
                 var result = await _computerVisionService.AddPicture(pictureStream);
+                var faceStream = _photo.GetStreamWithImageRotatedForExternalStorage();
+                var faceResult = await _faceService.AddPicture(faceStream);
 
                 if (!result.Succeeded)
                 {
@@ -118,6 +121,11 @@ namespace TravelMonkey.ViewModels
 
                 if (!string.IsNullOrWhiteSpace(result.LandmarkDescription))
                     PictureDescription += $". {result.LandmarkDescription}";
+
+                if (!string.IsNullOrWhiteSpace(faceResult))
+                {
+                    PictureDescription += $". {faceResult}";
+                }
             }
             finally
             {

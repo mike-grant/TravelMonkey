@@ -5,6 +5,7 @@ namespace TravelMonkey.Models
     public class AddPictureResult
     {
         public string Description { get; }
+        public string FaceDescription { get; }
         public string LandmarkDescription { get; }
         public Color AccentColor { get; }
         public bool Succeeded => !string.IsNullOrEmpty(Description) && AccentColor != Color.Default;

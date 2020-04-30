@@ -15,7 +15,7 @@
 
             <yummy:PancakeView Grid.Row="1" Padding="0" BorderColor="#44FFFFFF" CornerRadius="10" BorderThickness="2">
                 <Grid>
-                    <Image HorizontalOptions="Fill" VerticalOptions="Fill" IsVisible="{Binding ShowPhoto}" Source="{Binding PhotoSource}" Aspect="AspectFill">
+                    <Image HorizontalOptions="Fill" VerticalOptions="Fill" IsVisible="{Binding ShowPhoto}" Source="{Binding PhotoSource}" Aspect="AspectFit">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding TakePhotoCommand}" />
                         </Image.GestureRecognizers>
